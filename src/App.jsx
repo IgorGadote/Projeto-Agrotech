@@ -17,7 +17,7 @@ function App() {
   const [logs, setLogs] = useState([]);
   const [horaReal, setHoraReal] = useState('');
 
-  // Efeito 1: Relógio em tempo real (Horário de Brasília)
+  // Efeito 1: Relógio em tempo real
   useEffect(() => {
     const timer = setInterval(() => {
       setHoraReal(new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
@@ -25,7 +25,7 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // Efeito 2: Gerador de Logs (Memória do Sistema)
+  // Efeito 2: Gerador de Logs
   useEffect(() => {
     if (telaAtual === 'dashboard') {
       const horaLog = new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' });
@@ -33,7 +33,7 @@ function App() {
     }
   }, [statusBomba, telaAtual]);
 
-  // Efeito 3: Cérebro do Sistema IoT (Probabilidades e Automação)
+  // Efeito 3: Cérebro do Sistema IoT
   useEffect(() => {
     if (telaAtual !== 'dashboard') return;
 
@@ -69,7 +69,7 @@ function App() {
     return () => clearInterval(intervalo);
   }, [telaAtual, statusBomba, metaUmidade]);
 
-  // Função de validação de Login
+  // Função de Login
   const handleLogin = (e) => {
     e.preventDefault();
     if (!email.includes('@')) {
@@ -80,7 +80,7 @@ function App() {
     setTelaAtual('dashboard');
   };
 
-  // Botão de Emergência Manual
+  // Botão de Emergência
   const acionarBombaManual = () => {
     if (statusBomba === 'Desligada') {
       setStatusBomba('Irrigando (Manual)');
@@ -90,25 +90,20 @@ function App() {
   // ================= TELA DE LOGIN =================
   if (telaAtual === 'login') {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#eef2f5', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#eef2f5', fontFamily: 'sans-serif' }}>
         <div style={{ backgroundColor: '#fff', padding: '50px 40px', borderRadius: '12px', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', textAlign: 'center', width: '100%', maxWidth: '400px' }}>
-          <div style={{ backgroundColor: '#27ae60', color: '#fff', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '24px', fontWeight: 'bold' }}>
-            AG
-          </div>
           <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Agrotech Plataforma</h2>
-          <p style={{ color: '#7f8c8d', marginBottom: '30px', fontSize: '14px' }}>Acesse o painel de monitoramento</p>
-          
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <input 
               type="email" 
               placeholder="E-mail corporativo" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ padding: '15px', borderRadius: '8px', border: '1px solid #dcdde1', fontSize: '15px', outline: 'none' }}
+              style={{ padding: '15px', borderRadius: '8px', border: '1px solid #dcdde1' }}
             />
-            {erro && <span style={{ color: '#e74c3c', fontSize: '13px', fontWeight: '600', textAlign: 'left' }}>{erro}</span>}
-            <button type="submit" style={{ padding: '15px', backgroundColor: '#27ae60', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px', transition: 'background 0.3s' }}>
-              Entrar no Sistema
+            {erro && <span style={{ color: '#e74c3c' }}>{erro}</span>}
+            <button type="submit" style={{ padding: '15px', backgroundColor: '#27ae60', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
+              Entrar
             </button>
           </form>
         </div>
@@ -118,36 +113,48 @@ function App() {
 
   // ================= TELA DO DASHBOARD =================
   return (
-    <div style={{ backgroundColor: '#f4f7f6', minHeight: '100vh', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif' }}>
-      
-      {/* Header Premium */}
-      <header style={{ backgroundColor: '#2c3e50', color: '#ecf0f1', padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <div style={{ backgroundColor: '#27ae60', color: '#fff', width: '40px', height: '40px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>AG</div>
-          <h2 style={{ margin: 0, fontSize: '22px' }}>Painel Agrotech</h2>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-          <div style={{ textAlign: 'right' }}>
-            <span style={{ display: 'block', fontSize: '12px', color: '#bdc3c7' }}>Horário Oficial (BRT)</span>
-            <strong style={{ fontSize: '18px' }}>{horaReal}</strong>
-          </div>
-          <button onClick={() => setTelaAtual('login')} style={{ padding: '10px 20px', backgroundColor: '#e74c3c', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>
-            Sair
-          </button>
+    <div style={{ backgroundColor: '#f4f7f6', minHeight: '100vh', fontFamily: 'sans-serif', paddingBottom: '50px' }}>
+      <header style={{ backgroundColor: '#2c3e50', color: '#ecf0f1', padding: '20px 40px', display: 'flex', justifyContent: 'space-between' }}>
+        <h2 style={{ margin: 0 }}>Painel Agrotech</h2>
+        <div style={{ textAlign: 'right' }}>
+            <span style={{ fontSize: '12px' }}>{horaReal}</span>
+            <br/>
+            <button onClick={() => setTelaAtual('login')} style={{ marginTop: '5px', padding: '5px 10px', backgroundColor: '#e74c3c', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Sair</button>
         </div>
       </header>
 
       <main style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
-        
-        {/* Painel Central de Comando */}
-        <div style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', marginBottom: '30px', borderLeft: '6px solid #3498db' }}>
-          <h3 style={{ marginTop: 0, color: '#2c3e50', fontSize: '18px', borderBottom: '1px solid #eee', paddingBottom: '15px' }}>Automação & Controle</h3>
-          
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '40px', flexWrap: 'wrap', marginTop: '20px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontSize: '13px', fontWeight: 'bold', color: '#7f8c8d', textTransform: 'uppercase' }}>Gatilho (% Mínima)</label>
-              <input 
-                type="number" 
-                value={metaUmidade}
-                onChange={(e) => setMetaUmidade(Number(e.target.value))}
-                style={{ padding: '12px', width: '120px', borderRadius: '6px', border: '1
+        <div style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', marginBottom: '30px' }}>
+          <h3>Automação & Controle</h3>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <label>Gatilho (%):</label>
+            <input type="number" value={metaUmidade} onChange={(e) => setMetaUmidade(Number(e.target.value))} />
+            <button onClick={acionarBombaManual} disabled={statusBomba !== 'Desligada'}>Irrigação Manual</button>
+            <span>Status: {statusBomba}</span>
+          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+            <h3>Leitura do Solo</h3>
+            <h1 style={{ color: umidadeSolo < metaUmidade + 5 ? '#e74c3c' : '#27ae60' }}>{umidadeSolo.toFixed(1)}%</h1>
+            <p>{umidadeSolo < metaUmidade + 5 ? 'Atenção: Nível Crítico' : 'Umidade Estável.'}</p>
+          </div>
+
+          <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+            <h3>Risco de Pragas</h3>
+            <h1 style={{ color: probabilidadePraga > 20 ? '#f39c12' : '#27ae60' }}>{probabilidadePraga.toFixed(1)}%</h1>
+            <p>{probabilidadePraga > 20 ? 'Alerta: Risco Elevado' : 'Risco Controlado'}</p>
+          </div>
+
+          <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+            <h3>Histórico</h3>
+            {logs.map((log, index) => <div key={index} style={{ fontSize: '12px', padding: '5px' }}>{log}</div>)}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+export default App;

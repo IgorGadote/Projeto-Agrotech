@@ -93,7 +93,7 @@ function App() {
                 <span style={{ fontSize: '12px' }}>{horaReal}</span>
             </div>
             {/* NOVO BOTÃO DE PITCH */}
-            <a href="SEU_LINK_DO_YOUTUBE_AQUI" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', backgroundColor: '#f39c12', color: 'white', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold', fontSize: '14px' }}>
+            <a href="https://www.youtube.com/watch?v=pIrynstq1bE" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', backgroundColor: '#f39c12', color: 'white', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold', fontSize: '14px' }}>
               Veja o vídeo pitch
             </a>
             <button onClick={() => setTelaAtual('login')} style={{ padding: '10px 15px', backgroundColor: '#e74c3c', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Sair</button>
